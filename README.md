@@ -52,3 +52,10 @@ The primary goal of the project is to deliver the database-driven website for th
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- Documentation -->
+## Documentation
+
+Documentation available upon request.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
