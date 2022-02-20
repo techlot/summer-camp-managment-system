@@ -2,11 +2,11 @@ from flask import Flask, render_template, request, flash, json, jsonify
 import mysql.connector
 
 app = Flask(__name__)
-app.secret_key="257262"
+app.secret_key="***"
 
 config = {
     'user': 'root',
-    'password': 'databaz0',
+    'password': '***',
     'host': '127.0.0.1',
     'database': 'summer_camp',
     'raise_on_warnings': True
