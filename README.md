@@ -12,17 +12,17 @@ The primary goal of the project is to deliver a database-driven website for the 
 ![Administartive panel - Dashboard](preview/admin-dashboard.png)
 
 - #### Division panel - Manage applications
-  > A view, which is responsible for perfoming the recruitment procedure. It's equipped with all the necessary tools to assist recruiters as well as quickly and accurately parse applications by keywords to sift out the top candidates.  
+  > The applications management view is responsible for perfoming the recruitment procedure. It is equipped with all the necessary tools to assist recruiters as well as quickly and accurately parse applications by keywords to sift out the top candidates.  
 
 ![Administartive panel - Dashboard](preview/division-manage-applications.png)
 
 - #### Camper panel - Your applications
-  > A view, that is used by the campers (clients) to track their submitted applictions. 
+  > The submitted applications view is used by the campers (clients) to track their submitted applictions. 
 
 ![Administartive panel - Dashboard](preview/camper-your-applications.png)
 
-- #### Capmer panel - Apply
-  > A view, that is used by the campers (clients) to send their application for the desired program in the most efficient and esiest way. The view equipped with all the neccesary tools to create a positive user experience and provide clear and easy application procedure.
+- #### Camper panel - Apply
+  > The applications submission view is used by the campers (clients) to send their application for the desired program in the easiest and most efficient way. The view is equipped with all the neccesary tools to create a positive user experience and provide clear and an easy application procedure.
 
 ![Administartive panel - Dashboard](preview/camper-apply.png)
 
