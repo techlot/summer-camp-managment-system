@@ -1,8 +1,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project 
-The objective of this **Summer Camp Management System** is to improve the modern-day summer camp enrollment procedure as well as to provide the parties with more organized and convenient way of interacting with and managing summer camp by introducing web-based management solution. 
+The objective of this **Summer Camp Management System** is to improve the modern-day summer camp enrollment procedure as well as to provide the parties with a more organized and convenient way of interacting with and managing a summer camp by introducing a web-based management solution. 
 
-The primary goal of the project is to deliver the database-driven website for the local summer camp, which can be used by every party that impacts the work and is involved in the main idea of summer camps. The system will provide anyone interested with the opportunity to submit a summer camp application - in an easy and convenient way - as well as to enhance their summer camp experience. Also, the system will introduce the workers to the well-organized and efficient way of managing the summer camp.
+The primary goal of the project is to deliver a database-driven website for the local summer camp, which can be used by every party that impacts the work and is involved in the main ideas of summer camps. The system will provide anyone interested with the opportunity to submit a summer camp application - in an easy and convenient way - as well as to enhance their summer camp experience. Also, the system will introduce the workers to a well-organized and efficient way of managing the summer camp.
 
 ### Selected views
 
