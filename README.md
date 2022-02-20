@@ -26,7 +26,7 @@ The primary goal of the project is to deliver a database-driven website for the 
 
 ![Administartive panel - Dashboard](preview/camper-apply.png)
 
-**NOTE:** *All data presented in the views above are fake data and used for presentation purposes only.*
+**NOTE:** *All data presented in the views above are hypothetical data and used for presentation purposes only.*
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
