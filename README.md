@@ -7,7 +7,7 @@ The primary goal of the project is to deliver a database-driven website for the 
 ### Selected views
 
 - #### Administrative panel - Dashboard
-  > A view, that mostly focuses on the business objectives of the summer camp. Being one of the most important views and reasons why the system was developed, it provides the comperhensive overview of the institution's structure as well as gives important business insights. 
+  > The dashboard view focuses primarily on the business objectives of the summer camp. Being one of the most important views and reasons why the system was developed, it provides the comperhensive overview of the institution's structure as well as gives important business insights. 
   
 ![Administartive panel - Dashboard](preview/admin-dashboard.png)
 
@@ -16,7 +16,7 @@ The primary goal of the project is to deliver a database-driven website for the 
 
 ![Administartive panel - Dashboard](preview/division-manage-applications.png)
 
-- #### Capmer panel - Your applications
+- #### Camper panel - Your applications
   > A view, that is used by the campers (clients) to track their submitted applictions. 
 
 ![Administartive panel - Dashboard](preview/camper-your-applications.png)
