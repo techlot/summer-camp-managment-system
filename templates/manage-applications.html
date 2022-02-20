@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: baseline;
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+            padding: 10px;
+            margin-top: 10px;
+            width: 250px;
+            position: sticky;
+            font-size: 15px;
+        }
+
+        .sidebar {
+            bottom: 12px;
+            font-size: 16px;
+        }
+
+        .sidebar .active {
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 16%);
+        }
+
+        .user {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: baseline;
+        }
+
+        .greeting {
+            margin-top: 10px;
+            font-size: 12px;
+            width: 80%;
+            text-align: center;
+            color: gray;
+        }
+
+        .logout {
+            margin-top: 20%;
+        }
+
+        .content {
+            margin-top: 12px;
+            margin-bottom: 12px;
+            padding: 14px;
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+            font-size: 12px;
+        }
+
+        .container-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: baseline;
+        }
+
+        .sort-input {
+            width: 90%;
+            height: 100%;
+            margin-left: 5px;
+        }
+
+        #sort-btn {
+            height: 100%;
+            width: 100%;
+        }
+
+        .search-field {
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+        .status-input {
+            width: 100%;
+        }
+
+        hr.solid {
+            border-top: 1px solid #bbb;
+        }
+
+        .close-btn {
+            right: 10px;
+            margin: 0px;
+        }
+
+        #insert {
+            margin-left: 15px;
+        }
+
+        #close {
+            margin-right: 15px;
+        }
+
+        .alert {
+            border-radius: 0;
+            padding: 1px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+        }
+    </style>
+    <title>Manage applications</title>
+</head>
+
+<body>
+    <div>
+        {% block messages%}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{category}} alert-dismissible fade show text-center" role="alert">
+            {{ message }}
+            <button type="button" class="btn btn-sm close-btn" data-bs-dismiss="alert" aria-label="Close"><i
+                    class="fas fa-times-circle"></i></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% endblock messages%}
+    </div>
+    <div class="container-md">
+        <div class="row gx-1">
+            <div class="col-xl-3 sb col-md-push-3">
+                <nav id="sidebarMenu" class="d-md-block sidebar bg-white">
+                    <div class="container">
+                        <div class="user">
+                            <img src="/static/pfp.svg" alt="user-pfp" width="150" class="pfp" />
+                            <p class="greeting">{{division_name}}</p>
+                        </div>
+                        <div class="list-group list-group-flush mx-2 mt-3">
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"> <i
+                                    class="fas fa-chart-area fa-fw me-3"></i><span>Dashboard</span> </a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple active"> <i
+                                    class="fas fa-paste fa-fw me-3"></i><span>Manage applications</span> </a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-th-list fa-fw me-3"></i><span>Manage programs</span></a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-users  fa-fw me-3"></i><span>Manage campers</span></a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"> <i
+                                    class="fas fa-user-tie fa-fw me-3"></i><span>Manage councilors</span> </a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-trophy fa-fw me-3"></i><span>Manage activities</span></a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-bullhorn fa-fw me-3"></i><span>Manage events</span></a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-building fa-fw me-3"></i><span>Manage buildings</span></a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-hospital-user fa-fw me-3"></i><span>Manage amenities</span></a>
+                        </div>
+                        <div class="logout">
+                            <button type="button" class="btn btn-primary" id="logout">Logout</button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-9 mc col-md-push-9">
+                <div class="container-sm">
+                    <div class="content">
+                        <div class="col-md-12 search-field">
+                            <div class="row">
+
+                                <form class="form-inline my-2 my-lg-0" action="{{ url_for('manage_applications') }}"
+                                    method="POST" id="form-search">
+                                    <div class="form-group search-field form-group-sm row sort-section">
+
+                                        <div class="col-md-3">
+                                            <!-- Sort dropdown sessions -->
+                                            <div class="row">
+                                                <label for="dropwdownMenuButton1">Application period</label>
+                                                <select name="session_dropdown" id="dropwdownMenuButton1"
+                                                    class="form-control form-control-sm sort-input">
+                                                    {% block content %}
+                                                    {%for item in sessions%}
+                                                    {% if item[0] == session_sort %}
+                                                    <option value={{item[0]}} selected>{{item[1]}}</option>
+                                                    {% else %}
+                                                    <option value={{item[0]}}>{{item[1]}}</option>
+                                                    {% endif %}
+                                                    {%endfor%}
+                                                    {% endblock content %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <!-- Sort dropdownd status -->
+                                            <div class="row">
+                                                <label for="dropwdownMenuButton2">Application status</label>
+                                                <select name="status_dropdown" id="dropwdownMenuButton2"
+                                                    class="form-control form-control-sm sort-input">
+                                                    {% block content2 %}
+                                                    {%for item in statuses[:-1]%}
+                                                    {% if item[0] == status_sort %}
+                                                    <option value="{{item[0]}}" selected>{{item[1]}}</option>
+                                                    {% else %}
+                                                    <option value="{{item[0]}}">{{item[1]}}</option>
+                                                    {% endif %}
+                                                    {%endfor%}
+                                                    {% endblock content2 %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <!-- Search input field -->
+                                            <div class="row">
+                                                <label for="inputSearch">Applicant's name</label>
+                                                <input class="form-control form-control-sm sort-input" type="text"
+                                                    placeholder="Search" id="inputSearch" name="search_field"
+                                                    value="{{search_text}}">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-outline-success btn-sm  my-sm-0 sort-input"
+                                                type="submit" id="sort-btn">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <hr class="solid">
+                            <div class="row">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Program</th>
+                                            <th scope="col">Applicant</th>
+                                            <th scope="col">Submission date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Decision date</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% block content4 %}
+                                        {%for item in applications%}
+                                        <tr>
+                                            <th scope="row">{{item[0]}}</th>
+                                            <td class="col-md-3">
+                                                {{item[1]}}</td>
+                                            <td>{{item[2]}}</td>
+                                            <td>{{item[3]}}</td>
+                                            <td>
+                                                <h6>
+                                                    {% if item[4] == 'Accepted' %}
+                                                    <span class="badge rounded-pill bg-success">{{item[4]}}</span>
+                                                    {% elif item[4] == 'Rejected' %}
+                                                    <span class="badge rounded-pill bg-danger">{{item[4]}}</span>
+                                                    {% elif item[4] == 'Submitted' %}
+                                                    <span class="badge rounded-pill bg-secondary">{{item[4]}}</span>
+                                                    {% elif item[4] == 'Reviewing' %}
+                                                    <span class="badge rounded-pill bg-warning">{{item[4]}}</span>
+                                                    {% else %}
+                                                    <span class="badge rounded-pill bg-light">{{item[4]}}</span>
+                                                    {% endif %}
+                                                </h6>
+                                            </td>
+                                            <td>
+                                                {% if item[5] == None %}
+                                                <p>---</p>
+                                                {% else %}
+                                                {{item[5]}}
+                                                {%endif%}
+                                            </td>
+
+                                            <td style='white-space: nowrap'>
+                                                <button
+                                                    class="btn btn-outline-primary btn-sm my-sm-0 review_application"
+                                                    data-bs-toggle="modal" data-bs-target="#review_application"
+                                                    id={{item[0]}} type="submit">Review</button>
+
+                                                {% if item[4] == 'Accepted' or item[4] == 'Rejected' %}
+                                                <button class="btn btn-outline-warning btn-sm  my-sm-0 update_status"
+                                                    id={{item[0]}} disabled>Update status</button>
+
+                                                {% else %}
+                                                <button class="btn btn-outline-warning btn-sm  my-sm-0 update_status"
+                                                    data-bs-toggle="modal" data-bs-target="#edit_status_modal"
+                                                    id={{item[0]}}>Update status</button>
+                                                {% endif %}
+
+                                            </td>
+                                        </tr>
+                                        {%endfor%}
+                                        {% endblock content4 %}
+                                    </tbody>
+                                </table>
+                                <div class="modal" id="edit_status_modal" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update application status</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <label for="status_dropdown_new">Select New Status</label>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <select name="status_dropdown_new" id="status_dropdown_new"
+                                                            class="form-control form-control-sm">
+                                                            {%for status in statuses[1:-1]%}
+                                                            {% if status[1] == 'Submitted' %}
+                                                            <option value="{{status[0]}}" disabled>{{status[1]}}
+                                                            </option>
+                                                            {%else%}
+                                                            <option value="{{status[0]}}">{{status[1]}}</option>
+                                                            {% endif %}
+                                                            {%endfor%}
+                                                        </select>
+                                                    </div>
+                                                    <p id=warning></p>
+                                                </div>
+                                                <br />
+                                                <div class="container-buttons">
+                                                    <button type="button" class="btn btn-secondary" id="close"
+                                                        data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                                    <input type="submit" name="insert" id="insert" value="Update"
+                                                        class="btn btn-success" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal" id="review_application" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <h6 class="modal-title">Application <b>#</b><b
+                                                                id="application_id"></b></h6>
+                                                        <p class="modal-title">Submitted: <b id="application.date"></b>
+                                                        </p>
+                                                        <p class="modal-title">Program: <b id="program.name"></b></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <h6>Applicant's information</h6>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <p>First name: <b id="camper.first_name"></b></p>
+                                                                    <p>Middle name: <b id="camper.middle_name"></b></p>
+                                                                    <p>Last name: <b id="camper.last_name"></b></p>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>Date of birth: <b id="camper.date_of_birth"></b>
+                                                                    </p>
+                                                                    <p>Gender: <b id="camper.gender"></b></p>
+                                                                    <p></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <h6>Applicant's address</h6>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <p>Apartment number: <b
+                                                                            id="address.apartment_no"></b></p>
+                                                                    <p>Street number: <b id="address.street_number"></b>
+                                                                    </p>
+                                                                    <p>Street name: <b id="address.street_name"></b></p>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <p>Postal code: <b id="address.postal_code"></b></p>
+                                                                    <p>City: <b id="city.city_name"></b></p>
+                                                                    <p>Country: <b id="country.country_name"></b></p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <p>Applicant living with their guardian: <b
+                                                                        id="camper.adr_same_as_guard"></b></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="row">
+                                                                        <h6>Guardian's information</h6>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <p>First name: <b id="guardian.first_name"></b>
+                                                                        </p>
+                                                                        <p>Middle name: <b
+                                                                                id="guardian.middle_name"></b></p>
+                                                                        <p>Last name: <b id="guardian.last_name"></b>
+                                                                        </p>
+                                                                        <p>Gender: <b id="guardian.gender"></b></p>
+                                                                        <p>Relation to camper: <b
+                                                                                id="relation.relation_name"></b></p>
+                                                                        <p>Email address: <b
+                                                                                id="guardian.email_address"></b></p>
+                                                                        <p>Phone number: <b
+                                                                                id="guardian.phone_number"></b></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="row">
+                                                                        <h6>Guardian's address</h6>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <p>Apartment number: <b
+                                                                                id="ga.apartment_no"></b></p>
+                                                                        <p>Street number: <b id="ga.street_number"></b>
+                                                                        </p>
+                                                                        <p>Street name: <b id="ga.street_name"></b></p>
+                                                                        <p>Postal code: <b id="ga.postal_code"></b></p>
+                                                                        <p>City: <b id="gc.city_name"></b></p>
+                                                                        <p>Country: <b id="gcnt.country_name"></b></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="container-buttons">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        id="close-application" data-bs-dismiss="modal"
+                                                                        aria-label="Close">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>
+<script>
+    $(document).ready(function () {
+        document.getElementById("logout").onclick = function () {
+            location.href = "/";
+        };
+
+        $('#dropwdownMenuButton2').change(function () {
+            document.querySelector('#sort-btn').style.backgroundColor = '#198754';
+            document.querySelector('#sort-btn').style.color = 'white';
+        })
+
+        $('#dropwdownMenuButton1').change(function () {
+            document.querySelector('#sort-btn').style.backgroundColor = '#198754';
+            document.querySelector('#sort-btn').style.color = 'white';
+        })
+
+        $('#inputSearch').on('input', function () {
+            document.querySelector('#sort-btn').style.backgroundColor = '#198754';
+            document.querySelector('#sort-btn').style.color = 'white';
+        });
+
+        $(document).on('click', '.review_application', function () {
+            var application_id = $(this).attr("id");
+            $.ajax({
+                url: "/get_application",
+                method: "POST",
+                data: { application_id: application_id },
+                success: function (data) {
+                    var data_application = JSON.parse(data)
+                    document.getElementById('application_id').innerHTML = data_application[0]['application_id']
+                    document.getElementById('program.name').innerHTML = data_application[0]['program.name']
+                    document.getElementById('application.date').innerHTML = data_application[0]['application.date']
+                    document.getElementById('camper.first_name').innerHTML = data_application[0]['camper.first_name']
+                    document.getElementById('camper.middle_name').innerHTML = data_application[0]['camper.middle_name']
+                    document.getElementById('camper.last_name').innerHTML = data_application[0]['camper.last_name']
+                    document.getElementById('camper.date_of_birth').innerHTML = data_application[0]['camper.date_of_birth']
+                    document.getElementById('camper.gender').innerHTML = data_application[0]['camper.gender']
+                    document.getElementById('address.apartment_no').innerHTML = data_application[0]['address.apartment_no']
+                    document.getElementById('address.street_name').innerHTML = data_application[0]['address.street_name']
+                    document.getElementById('address.street_number').innerHTML = data_application[0]['address.street_number']
+                    document.getElementById('address.postal_code').innerHTML = data_application[0]['address.postal_code']
+                    document.getElementById('city.city_name').innerHTML = data_application[0]['city.city_name']
+                    document.getElementById('country.country_name').innerHTML = data_application[0]['country.country_name']
+                    document.getElementById('camper.adr_same_as_guard').innerHTML = data_application[0]['camper.adr_same_as_guard']
+                    document.getElementById('guardian.first_name').innerHTML = data_application[0]['guardian.first_name']
+                    document.getElementById('guardian.middle_name').innerHTML = data_application[0]['guardian.middle_name']
+                    document.getElementById('guardian.last_name').innerHTML = data_application[0]['guardian.last_name']
+                    document.getElementById('guardian.gender').innerHTML = data_application[0]['guardian.gender']
+                    document.getElementById('relation.relation_name').innerHTML = data_application[0]['relation.relation_name']
+                    document.getElementById('guardian.email_address').innerHTML = data_application[0]['guardian.email_address']
+                    document.getElementById('guardian.phone_number').innerHTML = data_application[0]['guardian.phone_number']
+                    document.getElementById('ga.apartment_no').innerHTML = data_application[0]['ga.apartment_no']
+                    document.getElementById('ga.street_number').innerHTML = data_application[0]['ga.street_number']
+                    document.getElementById('ga.street_name').innerHTML = data_application[0]['ga.street_name']
+                    document.getElementById('ga.postal_code').innerHTML = data_application[0]['ga.postal_code']
+                    document.getElementById('gc.city_name').innerHTML = data_application[0]['gc.city_name']
+                    document.getElementById('gcnt.country_name').innerHTML = data_application[0]['gcnt.country_name']
+                }
+            })
+        })
+        $(document).on('click', '.update_status', function status() {
+            var application_id = $(this).attr("id");
+            $.ajax({
+                url: "/select",
+                method: "POST",
+                data: { application_id: application_id },
+                success: function (data) {
+                    $('#edit_status_modal').modal('show');
+                    var data_rs = JSON.parse(data)
+                    document.getElementById('status_dropdown_new').selectedIndex = data_rs[0]['Id'] - 1;
+                    if ((data_rs[0]['Id']) == 3) {
+                        alert("Note! Changing status 'submitted' is irreversible action!")
+                    }
+                }
+            })
+            $(document).on('click', '#insert', function () {
+                var new_status_id = $('#status_dropdown_new').val();
+                $.ajax({
+                    url: "/update",
+                    method: "POST",
+                    data: { status_id: new_status_id, application_id: application_id },
+                    success: function (data) {
+                        $('#edit_status_modal').modal('hide');
+                        if (data == 'success') {
+                            location.reload();
+                        }
+                    }
+                })
+            })
+        });
+    });
+</script>

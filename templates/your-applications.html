@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <title>Your applications</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: baseline;
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+            padding: 10px;
+            margin-top: 10px;
+            width: 250px;
+            position: sticky;
+            font-size: 15px;
+        }
+
+        .sidebar {
+            bottom: 12px;
+            font-size: 16px;
+        }
+
+        .sidebar .active {
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 16%);
+        }
+
+        .user {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: baseline;
+        }
+
+        .greeting {
+            margin-top: 10px;
+            font-size: 12px;
+            width: 80%;
+            text-align: center;
+            color: gray;
+        }
+
+        .logout {
+            margin-top: 20%;
+        }
+
+        .content {
+            margin-top: 12px;
+            margin-bottom: 12px;
+            padding: 14px;
+
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+            font-size: 12px;
+        }
+
+        .container-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: baseline;
+        }
+
+        .sort-input {
+            width: 90%;
+            height: 100%;
+            margin-left: 5px;
+        }
+
+        #sort-btn {
+            height: 100%;
+            width: 100%;
+        }
+
+        .search-field {
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+        .status-input {
+            width: 100%;
+        }
+
+        hr.solid {
+            border-top: 1px solid #bbb;
+        }
+
+        .alert {
+            border-radius: 0;
+            padding: 1px;
+            font-size: 14px;
+            box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+        }
+
+        .close-btn {
+            right: 10px;
+            margin: 0px;
+        }
+
+        #insert {
+            margin-left: 15px;
+        }
+
+        #close {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        {% block messages%}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{category}} alert-dismissible fade show text-center" role="alert">
+            {{ message }}
+            <button type="button" class="btn btn-sm close-btn" data-bs-dismiss="alert" aria-label="Close"><i
+                    class="fas fa-times-circle"></i></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% endblock messages%}
+    </div>
+    <div class="container-md">
+        <div class="row gx-1">
+            <div class="col-xl-3 sb col-md-push-3">
+                <nav id="sidebarMenu" class="d-md-block sidebar bg-white">
+                    <div class="container">
+                        <div class="user">
+                            <img src="/static/pfp.svg" alt="user-pfp" width="150" class="pfp" />
+                            <p class="greeting">Hello, {{username}}</p>
+                        </div>
+                        <div class="list-group list-group-flush mx-2 mt-3">
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"> <i
+                                    class="fas fa-user-circle fa-fw me-3"></i><span>Camper's profile</span> </a>
+                            <a href="#"
+                                class="list-group-item list-group-item-action inner py-2 rounded ripple active"><i
+                                    class="fas fa-newspaper  fa-fw me-3"></i><span>Your applications</span></a>
+                            <a href="/apply" class="list-group-item list-group-item-action  inner py-2 rounded ripple">
+                                <i class="fas fa-pencil-alt fa-fw me-3"></i><span>Apply</span> </a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-calendar-alt fa-fw me-3"></i><span>My classess</span></a>
+
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-chart-line fa-fw me-3"></i><span>Your activities</span></a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-signature fa-fw me-3"></i><span>Sign up for activity</span></a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-store fa-fw me-3"></i><span>Amenities</span></a>
+                            <a href="#" class="list-group-item list-group-item-action py-2 rounded ripple disabled"><i
+                                    class="fas fa-hospital-user fa-fw me-3"></i><span>Housing</span></a>
+                        </div>
+                        <div class="logout">
+                            <button type="button" class="btn btn-primary" id="logout">Logout</button>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-9 mc col-md-push-9">
+                <div class="container-sm">
+                    <div class="content">
+                        <div class="col-md-12 search-field">
+                            <div class="row">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Program</th>
+                                            <th scope="col">Division</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Decision date</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% block generate_applications %}
+                                        {% for application in applications %}
+                                        <tr>
+                                            <td><b>{{application[0]}}</b></td>
+                                            <td>{{application[1]}}</td>
+                                            <td class="col-md-3">{{application[2]}}</td>
+                                            <td>{{application[3]}}</td>
+                                            <td>
+                                                {% if application[4] == 'Accepted' %}
+                                                <span class="badge rounded-pill bg-success">{{application[4]}}</span>
+                                                {% elif application[4] == 'Rejected' %}
+                                                <span class="badge rounded-pill bg-danger">{{application[4]}}</span>
+                                                {% elif application[4] == 'Submitted' %}
+                                                <span class="badge rounded-pill bg-secondary">{{application[4]}}</span>
+                                                {% elif application[4] == 'Reviewing' %}
+                                                <span class="badge rounded-pill bg-warning">{{application[4]}}</span>
+                                                {% else %}
+                                                <span class="badge rounded-pill bg-light">{{application[4]}}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if application[5] == None %}
+                                                <p>---</p>
+                                                {% else %}
+                                                {{application[5]}}
+                                                {%endif%}
+                                            </td>
+                                            <td>
+                                                {% if application[4] == "Submitted"%}
+                                                <button
+                                                    class="btn btn-outline-danger btn-sm my-sm-0 withdraw_application"
+                                                    data-bs-toggle="modal" data-bs-target="#withdraw"
+                                                    id={{application[0]}} type="submit">Withdraw</button>
+                                                {% else %}
+                                                <button
+                                                    class="btn btn-outline-danger btn-sm my-sm-0 withdraw_application"
+                                                    id={{application[0]}} type="submit" disabled>Withdraw</button>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% endblock generate_applications %}
+                                    </tbody>
+                                </table>
+                                <div class="modal" id="withdraw" tabindex="-1" role="dialog"
+                                    aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Delete application</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="prompt">
+                                                    <p>Are you sure you want to withraw this application?</p>
+                                                </div>
+                                                <br>
+                                                <div class="container-buttons">
+                                                    <button type="button" class="btn btn-secondary" id="close"
+                                                        data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                    <input type="submit" name="delete" id="delete" value="Yes"
+                                                        class="btn btn-success" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                crossorigin="anonymous"></script>
+</body>
+<script>
+    document.getElementById("logout").onclick = function () {
+        location.href = "/";
+    };
+
+    $(document).ready(function () {
+        $(document).on("click", ".withdraw_application", function () {
+            var application_id = $(this).attr("id");
+            $(document).on("click", "#delete", function () {
+                $.ajax({
+                    url: "/delete",
+                    method: "POST",
+                    data: { application_id: application_id },
+                    success: function (data) {
+                        $("#withdraw").modal("hide");
+                        if (data == 'success') {
+                            location.reload();
+                        }
+                    }
+                })
+            })
+        })
+    })
+</script>
+</html>
