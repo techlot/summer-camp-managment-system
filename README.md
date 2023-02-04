@@ -7,12 +7,12 @@ The primary goal of the project is to deliver a database-driven website for the 
 ### Selected views
 
 - #### Administrative panel - Dashboard
-  > The dashboard view focuses primarily on the business objectives of the summer camp. Being one of the most important views and reasons why the system was developed, it provides the comperhensive overview of the institution's structure as well as gives important business insights. 
+  > The dashboard view focuses primarily on the business objectives of the summer camp. Being one of the most important views and reasons why the system was developed, it provides the comprehensive overview of the institution's structure as well as gives important business insights. 
   
 ![Administartive panel - Dashboard](preview/admin-dashboard.png)
 
 - #### Division panel - Manage applications
-  > The applications management view is responsible for perfoming the recruitment procedure. It is equipped with all the necessary tools to assist recruiters as well as quickly and accurately parse applications by keywords to sift out the top candidates.  
+  > The applications management view is responsible for performing the recruitment procedure. It is equipped with all the necessary tools to assist recruiters as well as quickly and accurately parse applications by keywords to sift out the top candidates.  
 
 ![Administartive panel - Dashboard](preview/division-manage-applications.png)
 
