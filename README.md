@@ -22,7 +22,7 @@ The primary goal of the project is to deliver a database-driven website for the 
 ![Administartive panel - Dashboard](preview/camper-your-applications.png)
 
 - #### Camper panel - Apply
-  > The applications submission view is used by the campers (clients) to send their application for the desired program in the easiest and most efficient way. The view is equipped with all the neccesary tools to create a positive user experience and provide clear and an easy application procedure.
+  > The applications submission view is used by the campers (clients) to send their application for the desired program in the easiest and most efficient way. The view is equipped with all the necessary tools to create a positive user experience and provide a clear and easy application procedure.
 
 ![Administartive panel - Dashboard](preview/camper-apply.png)
 
